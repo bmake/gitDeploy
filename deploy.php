@@ -3,7 +3,7 @@
 /*
  *
  * Credits to
- *      Miloslav Hůla (https://github.com/milo)
+ *      Miloslav Hůla (https://gist.github.com/milo/daed6e958ea534e4eba3)
  *
  */
 
@@ -15,6 +15,7 @@ error_reporting(E_ALL);
  *
  *  */
 $config['secret'] = "P^:]KAbVYQ39`MB;";
+
 
 
 
@@ -84,11 +85,18 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
         $log['repository'] = $repoName;
 
         if(file_exists("$repoName/phploy.ini")){
-            chdir($repoName);
-            exec('phploy', $output);
 
-            var_dump($output);
-            $log['phploy'] = $output;
+            // Producation Deployment
+            if($payload->ref == 'refs/heads/master'){
+                chdir($repoName);
+                exec('git reset --hard HEAD && git pull', $output);
+
+                var_dump($output);
+                $log['git'] = $output;
+
+                exec('phploy');
+            }
+
         }
         else {
             throw new \Exception("Repository or phploy configuration not found in $repoName");
@@ -105,7 +113,7 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
 
 
 print_r(json_encode($log));
-file_put_contents('webhook.log', json_encode($log)."\n", FILE_APPEND);
+file_put_contents('deploy.log', json_encode($log)."\n", FILE_APPEND);
 
 
 ?>
