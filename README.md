@@ -1,8 +1,6 @@
 # gitDeploy
 
-Script to deploy an applications when a commit in github appears. Reliased via Github Webhooks
-
-Upload to remote server via (s)ftp is handlet by [PHPloy](https://github.com/banago/PHPloy)
+Php Script for deployment of an github repository when a commit is made. Upload via (s)ftp to a remote server is handeled by [PHPloy](https://github.com/banago/PHPloy). 
 
 ## Requirments
 
