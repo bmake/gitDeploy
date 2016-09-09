@@ -7,7 +7,7 @@ Php Script for deployment of an github repository when a commit is made. Upload 
 - [PHPloy](https://github.com/banago/PHPloy)
 
 
-## Example
+## Example phploy.ini
 	
 ```ini
 	[production]
