@@ -5,3 +5,24 @@ Php Script for deployment of an github repository when a commit is made. Upload 
 ## Requirments
 
 - [PHPloy](https://github.com/banago/PHPloy)
+
+
+## Example
+	
+```ini
+	[production]
+    scheme = sftp
+    user = "username"
+    pass = "password"
+    host = "server.local"
+    path = "/path/to/folder/"
+    port = 22
+    permissions = 0777
+
+    include[] = 'bower_components'
+
+    pre-deploy[] = "composer update"
+    pre-deploy[] = "bower update"
+
+    logger = "on"
+```
